@@ -7,11 +7,10 @@ function subtract(a, b) {
 }
 
 function operate(operation, firstOperand, secondOperand) {
-    console.log(`operation: ${operation}`)
     switch (true) {
-        case  operation.includes('+'):
+        case operation.includes('+'):
             return add(firstOperand, secondOperand);
-        case '-' :
+        case operation.includes('-') :
             return subtract(firstOperand, secondOperand);
         default :
             console.log('failed')
@@ -21,7 +20,6 @@ function operate(operation, firstOperand, secondOperand) {
 const prevDisplay = document.querySelector('#previous');
 const currDisplay = document.querySelector('#current');
 
-const one = document.querySelector('#one');
 const plus = document.querySelector('#add');
 const equals = document.querySelector('#equals');
 
@@ -41,16 +39,16 @@ plus.addEventListener('click', () => {
     console.log(values);
     prevDisplay.textContent += `${currDisplay.textContent}+`
     currDisplay.textContent = '';
-    
-    // if (values.length == 2) {
-    //     let sum = add(values[0], values[1]);
-    //     values = [];
-    //     values.push(sum);
-    //     console.log(values);
-    //     currDisplay.textContent = '';
-    //     prevDisplay.textContent = `${sum}+`;
-    // }
-})
+
+    if (values.length == 2) {
+        let sum = add(values[0], values[1]);
+        values = [];
+        values.push(sum);
+        console.log(values);
+        currDisplay.textContent = '';
+        prevDisplay.textContent = `${sum}+`;
+    }
+});
 
 equals.addEventListener('click', () => {
     if (prevDisplay.textContent == '') {
@@ -63,4 +61,4 @@ equals.addEventListener('click', () => {
     currDisplay.textContent = result;
     prevDisplay.textContent = '';
     values = [];
-})
+});
