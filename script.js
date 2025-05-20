@@ -7,10 +7,11 @@ function subtract(a, b) {
 }
 
 function operate(operation, firstOperand, secondOperand) {
+    operation = operation.substring(0, operation.length-1);
     switch (true) {
         case operation.includes('+'):
             return add(firstOperand, secondOperand);
-        case operation.includes('-') :
+        case operation.includes('-'):
             return subtract(firstOperand, secondOperand);
         default :
             console.log('failed')
@@ -21,6 +22,7 @@ const prevDisplay = document.querySelector('#previous');
 const currDisplay = document.querySelector('#current');
 
 const plus = document.querySelector('#add');
+const minus = document.querySelector('#subtract');
 const equals = document.querySelector('#equals');
 
 const numbers = document.querySelectorAll('.number');
@@ -33,29 +35,40 @@ numbers.forEach((number) => {
 
 let values = [];
 
-
 plus.addEventListener('click', () => {
     values.push(Number(currDisplay.textContent));
-    console.log(values);
     prevDisplay.textContent += `${currDisplay.textContent}+`
     currDisplay.textContent = '';
 
     if (values.length == 2) {
-        let sum = add(values[0], values[1]);
+        let sum = operate(prevDisplay.textContent, values[0], values[1]);
         values = [];
         values.push(sum);
-        console.log(values);
         currDisplay.textContent = '';
         prevDisplay.textContent = `${sum}+`;
     }
 });
 
+minus.addEventListener('click', () => {
+    values.push(Number(currDisplay.textContent));
+    prevDisplay.textContent += `${currDisplay.textContent}-`
+    currDisplay.textContent = '';
+
+    if (values.length == 2) {
+        let difference = operate(prevDisplay.textContent, values[0], values[1]);
+        values = [];
+        values.push(difference);
+        currDisplay.textContent = '';
+        prevDisplay.textContent = `${difference}-`
+    }
+});
+
 equals.addEventListener('click', () => {
     if (prevDisplay.textContent == '') {
-        currDisplay.textContent = currDisplay.textContent;
+        return currDisplay.textContent = currDisplay.textContent;
     }
 
-    prevDisplay.textContent += currDisplay.textContent;
+    prevDisplay.textContent += `${currDisplay.textContent}=`;
     values.push(Number(currDisplay.textContent));
     let result = operate(prevDisplay.textContent, values[0], values[1]);
     currDisplay.textContent = result;
