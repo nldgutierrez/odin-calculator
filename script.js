@@ -53,6 +53,10 @@ const equals = document.querySelector('#equals');
 const numbers = document.querySelectorAll('.number');
 const dot = document.querySelector('#dot');
 
+const backspace = document.querySelector('#backspace');
+
+let result;
+
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
         if (result) {
@@ -63,12 +67,15 @@ numbers.forEach((number) => {
     });
 });
 
+backspace.addEventListener('click', () => {
+    currDisplay.textContent = currDisplay.textContent.slice(0, currDisplay.textContent.length-1);
+})
+
 dot.addEventListener('click', () => {
     if (!currDisplay.textContent.includes('.')) currDisplay.textContent += dot.textContent;
 })
 
 let values = [];
-let result;
 
 const operators = document.querySelectorAll('.operator');
 
@@ -87,65 +94,6 @@ operators.forEach((operator) => {
         }
     });
 });
-
-/*
-plus.addEventListener('click', () => {
-    values.push(Number(currDisplay.textContent));
-    prevDisplay.textContent += `${currDisplay.textContent}+`
-    currDisplay.textContent = '';
-
-    if (values.length == 2) {
-        let sum = operate(prevDisplay.textContent, values[0], values[1]);
-        values = [];
-        values.push(sum);
-        currDisplay.textContent = '';
-        prevDisplay.textContent = `${sum}+`;
-    }
-});
-
-minus.addEventListener('click', () => {
-    values.push(Number(currDisplay.textContent));
-    prevDisplay.textContent += `${currDisplay.textContent}-`
-    currDisplay.textContent = '';
-
-    if (values.length == 2) {
-        let difference = operate(prevDisplay.textContent, values[0], values[1]);
-        values = [];
-        values.push(difference);
-        currDisplay.textContent = '';
-        prevDisplay.textContent = `${difference}-`
-    }
-});
-
-times.addEventListener('click', () => {
-    values.push(Number(currDisplay.textContent));
-    prevDisplay.textContent += `${currDisplay.textContent}*`
-    currDisplay.textContent = '';
-
-    if (values.length == 2) {
-        let product = operate(prevDisplay.textContent, values[0], values[1]);
-        values = [];
-        values.push(product);
-        currDisplay.textContent = '';
-        prevDisplay.textContent = `${product}*`
-    }
-});
-
-dividedBy.addEventListener('click', () => {
-    values.push(Number(currDisplay.textContent));
-    prevDisplay.textContent += `${currDisplay.textContent}/`
-    currDisplay.textContent = '';
-
-    if (values.length == 2) {
-        let quotient = operate(prevDisplay.textContent, values[0], values[1]);
-        values = [];
-        values.push(quotient);
-        currDisplay.textContent = '';
-        prevDisplay.textContent = `${quotient}/`
-    }
-})
-*/
-
 
 equals.addEventListener('click', () => {
     if (prevDisplay.textContent === '') {
