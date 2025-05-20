@@ -10,6 +10,11 @@ function multiply(a, b) {
     return a * b;
 }
 
+function divide(a, b) {
+    if (a === 0 || b === 0) return 'ERROR'
+    return a / b;
+}
+
 function operate(operation, firstOperand, secondOperand) {
     operation = operation.substring(1, operation.length-1);
     switch (true) {
@@ -19,6 +24,8 @@ function operate(operation, firstOperand, secondOperand) {
             return subtract(firstOperand, secondOperand);
         case operation.includes('*'):
             return multiply(firstOperand, secondOperand);
+        case operation.includes('/'):
+            return divide(firstOperand, secondOperand);
         default :
             console.log('failed')
     }
@@ -30,6 +37,7 @@ const currDisplay = document.querySelector('#current');
 const plus = document.querySelector('#add');
 const minus = document.querySelector('#subtract');
 const times = document.querySelector('#multiply');
+const dividedBy = document.querySelector('#divide');
 const equals = document.querySelector('#equals');
 
 const numbers = document.querySelectorAll('.number');
@@ -82,10 +90,24 @@ times.addEventListener('click', () => {
         currDisplay.textContent = '';
         prevDisplay.textContent = `${product}*`
     }
+});
+
+dividedBy.addEventListener('click', () => {
+    values.push(Number(currDisplay.textContent));
+    prevDisplay.textContent += `${currDisplay.textContent}/`
+    currDisplay.textContent = '';
+
+    if (values.length == 2) {
+        let quotient = operate(prevDisplay.textContent, values[0], values[1]);
+        values = [];
+        values.push(quotient);
+        currDisplay.textContent = '';
+        prevDisplay.textContent = `${quotient}/`
+    }
 })
 
 equals.addEventListener('click', () => {
-    if (prevDisplay.textContent == '') {
+    if (prevDisplay.textContent === '') {
         return currDisplay.textContent = currDisplay.textContent;
     }
 
