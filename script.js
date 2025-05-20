@@ -1,18 +1,26 @@
 function add(a, b) {
-    return a + b;
+    let result = a + b;
+    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
+    return result;
 }
 
 function subtract(a, b) {
+    let result = a - b;
+    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
     return a - b;
 }
 
 function multiply(a, b) {
-    return a * b;
+    let result = a * b;
+    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
+    return result;
 }
 
 function divide(a, b) {
     if (a === 0 || b === 0) return 'ERROR'
-    return a / b;
+    let result = a / b;
+    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
+    return result;
 }
 
 function operate(operation, firstOperand, secondOperand) {
