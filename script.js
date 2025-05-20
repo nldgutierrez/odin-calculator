@@ -41,12 +41,17 @@ const dividedBy = document.querySelector('#divide');
 const equals = document.querySelector('#equals');
 
 const numbers = document.querySelectorAll('.number');
+const dot = document.querySelector('#dot');
 
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
         currDisplay.textContent += number.textContent;
     });
 });
+
+dot.addEventListener('click', () => {
+    if (!currDisplay.textContent.includes('.')) currDisplay.textContent += dot.textContent;
+})
 
 let values = [];
 
@@ -108,7 +113,7 @@ dividedBy.addEventListener('click', () => {
 
 equals.addEventListener('click', () => {
     if (prevDisplay.textContent === '') {
-        return currDisplay.textContent = currDisplay.textContent;
+        return currDisplay.textContent = Number(currDisplay.textContent);
     }
 
     prevDisplay.textContent += `${currDisplay.textContent}=`;
