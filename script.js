@@ -6,13 +6,21 @@ function subtract(a, b) {
     return a - b;
 }
 
+function multiply(a, b) {
+    return a * b;
+}
+
 function operate(operation, firstOperand, secondOperand) {
     operation = operation.substring(0, operation.length-1);
+    console.log(values);
+    console.log(operation)
     switch (true) {
         case operation.includes('+'):
             return add(firstOperand, secondOperand);
         case operation.includes('-'):
             return subtract(firstOperand, secondOperand);
+        case operation.includes('*'):
+            return multiply(firstOperand, secondOperand);
         default :
             console.log('failed')
     }
@@ -23,6 +31,7 @@ const currDisplay = document.querySelector('#current');
 
 const plus = document.querySelector('#add');
 const minus = document.querySelector('#subtract');
+const times = document.querySelector('#multiply');
 const equals = document.querySelector('#equals');
 
 const numbers = document.querySelectorAll('.number');
@@ -62,6 +71,20 @@ minus.addEventListener('click', () => {
         prevDisplay.textContent = `${difference}-`
     }
 });
+
+times.addEventListener('click', () => {
+    values.push(Number(currDisplay.textContent));
+    prevDisplay.textContent += `${currDisplay.textContent}*`
+    currDisplay.textContent = '';
+
+    if (values.length == 2) {
+        let product = operate(prevDisplay.textContent, values[0], values[1]);
+        values = [];
+        values.push(product);
+        currDisplay.textContent = '';
+        prevDisplay.textContent = `${product}*`
+    }
+})
 
 equals.addEventListener('click', () => {
     if (prevDisplay.textContent == '') {
