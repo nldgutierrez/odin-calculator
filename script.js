@@ -81,9 +81,17 @@ const operators = document.querySelectorAll('.operator');
 
 operators.forEach((operator) => {
     operator.addEventListener('click', () => {
-        values.push(Number(currDisplay.textContent));
-        prevDisplay.textContent += `${currDisplay.textContent}${operator.textContent}`
-        currDisplay.textContent = '';
+
+        if (currDisplay.textContent) {
+            values.push(Number(currDisplay.textContent));
+            prevDisplay.textContent += `${currDisplay.textContent}${operator.textContent}`
+            currDisplay.textContent = '';
+        }
+
+        if (prevDisplay.textContent && !currDisplay.textContent) {
+            prevDisplay.textContent = prevDisplay.textContent.slice(0, prevDisplay.textContent.length-1);
+            prevDisplay.textContent += `${operator.textContent}`
+        }
 
         if (values.length == 2) {
             let answer = operate(prevDisplay.textContent, values[0], values[1]);
