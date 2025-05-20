@@ -24,7 +24,6 @@ function divide(a, b) {
 }
 
 function operate(operation, firstOperand, secondOperand) {
-    console.log(values);
     operation = operation.substring(1, operation.length-1);
     switch (true) {
         case values.includes(NaN):
@@ -56,6 +55,10 @@ const dot = document.querySelector('#dot');
 
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
+        if (result) {
+            result = 0;
+            currDisplay.textContent = '';
+        }
         currDisplay.textContent += number.textContent;
     });
 });
@@ -65,6 +68,7 @@ dot.addEventListener('click', () => {
 })
 
 let values = [];
+let result;
 
 plus.addEventListener('click', () => {
     values.push(Number(currDisplay.textContent));
@@ -130,7 +134,7 @@ equals.addEventListener('click', () => {
 
     prevDisplay.textContent += `${currDisplay.textContent}=`;
     values.push(Number(currDisplay.textContent));
-    let result = operate(prevDisplay.textContent, values[0], values[1]);
+    result = operate(prevDisplay.textContent, values[0], values[1]);
     currDisplay.textContent = result;
     prevDisplay.textContent = '';
     values = [];
