@@ -24,8 +24,11 @@ function divide(a, b) {
 }
 
 function operate(operation, firstOperand, secondOperand) {
+    console.log(values);
     operation = operation.substring(1, operation.length-1);
     switch (true) {
+        case values.includes(NaN):
+            return 'ERROR'
         case operation.includes('+'):
             return add(firstOperand, secondOperand);
         case operation.includes('-'):
@@ -121,6 +124,7 @@ dividedBy.addEventListener('click', () => {
 
 equals.addEventListener('click', () => {
     if (prevDisplay.textContent === '') {
+        if (currDisplay.textContent === 'ERROR') return 'ERROR';
         return currDisplay.textContent = Number(currDisplay.textContent);
     }
 
