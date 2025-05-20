@@ -7,7 +7,7 @@ function add(a, b) {
 function subtract(a, b) {
     let result = a - b;
     result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
-    return a - b;
+    return result;
 }
 
 function multiply(a, b) {
@@ -70,6 +70,25 @@ dot.addEventListener('click', () => {
 let values = [];
 let result;
 
+const operators = document.querySelectorAll('.operator');
+
+operators.forEach((operator) => {
+    operator.addEventListener('click', () => {
+        values.push(Number(currDisplay.textContent));
+        prevDisplay.textContent += `${currDisplay.textContent}${operator.textContent}`
+        currDisplay.textContent = '';
+
+        if (values.length == 2) {
+            let answer = operate(prevDisplay.textContent, values[0], values[1]);
+            values = [];
+            values.push(answer);
+            currDisplay.textContent = '';
+            prevDisplay.textContent = `${answer}${operator.textContent}`;
+        }
+    });
+});
+
+/*
 plus.addEventListener('click', () => {
     values.push(Number(currDisplay.textContent));
     prevDisplay.textContent += `${currDisplay.textContent}+`
@@ -125,6 +144,8 @@ dividedBy.addEventListener('click', () => {
         prevDisplay.textContent = `${quotient}/`
     }
 })
+*/
+
 
 equals.addEventListener('click', () => {
     if (prevDisplay.textContent === '') {
