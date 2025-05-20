@@ -47,3 +47,13 @@
 button {
     aspect-ratio: 1/1;
 }
+
+#previous {
+    background-color: lightcoral;
+    height: 1rem;
+}
+
+#current {
+    background-color: lightblue;
+    height: 1rem;
+}
