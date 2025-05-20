@@ -11,9 +11,7 @@ function multiply(a, b) {
 }
 
 function operate(operation, firstOperand, secondOperand) {
-    operation = operation.substring(0, operation.length-1);
-    console.log(values);
-    console.log(operation)
+    operation = operation.substring(1, operation.length-1);
     switch (true) {
         case operation.includes('+'):
             return add(firstOperand, secondOperand);
