@@ -54,6 +54,7 @@ const numbers = document.querySelectorAll('.number');
 const dot = document.querySelector('#dot');
 
 const backspace = document.querySelector('#backspace');
+const clear = document.querySelector('#clear');
 
 let result;
 
@@ -69,6 +70,12 @@ numbers.forEach((number) => {
 
 backspace.addEventListener('click', () => {
     currDisplay.textContent = currDisplay.textContent.slice(0, currDisplay.textContent.length-1);
+})
+
+clear.addEventListener('click', () => {
+    currDisplay.textContent = ''
+    prevDisplay.textContent = ''
+    values = [];
 })
 
 dot.addEventListener('click', () => {
