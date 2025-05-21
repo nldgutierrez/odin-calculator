@@ -1,26 +1,18 @@
 function add(a, b) {
-    let result = a + b;
-    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
-    return result;
+    return a + b;
 }
 
 function subtract(a, b) {
-    let result = a - b;
-    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
-    return result;
+    return a - b;
 }
 
 function multiply(a, b) {
-    let result = a * b;
-    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
-    return result;
+    return a * b;
 }
 
 function divide(a, b) {
     if (a === 0 || b === 0) return 'ERROR'
-    let result = a / b;
-    result = Math.round((result + Number.EPSILON) * 10000000000) / 10000000000;
-    return result;
+    return a / b;
 }
 
 function operate(operation, firstOperand, secondOperand) {
@@ -63,6 +55,7 @@ numbers.forEach((number) => {
             currDisplay.textContent = '';
         }
         currDisplay.textContent += number.textContent;
+        currDisplay.textContent = currDisplay.textContent.slice(0, 13);
     });
 });
 
@@ -126,6 +119,7 @@ equals.addEventListener('click', () => {
     values.push(Number(currDisplay.textContent));
     result = operate(prevDisplay.textContent, values[0], values[1]);
     currDisplay.textContent = result;
+    currDisplay.textContent = currDisplay.textContent.slice(0, 13);
     prevDisplay.textContent = '';
     values = [];
 });

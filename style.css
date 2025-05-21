@@ -27,6 +27,8 @@
     grid-column: 1 / 5;
     display: flex;
     flex-direction: column;
+
+    text-align: right;
 }
 
 #btn-0 {
