@@ -1,25 +1,20 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    font-family: monospace;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-}
-
-.header {
-    grid-row: 1;
-}
-
-.footer {
-    grid-row: 3;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .body {
-    grid-column: 5 / 9;
-    grid-row: 2;
+    background-color: lightgray;
+    padding: 16px;
+    border-radius: 16px;
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -29,8 +24,9 @@
 
 .display {
     border: 1px solid;
-    height: 100%;
     grid-column: 1 / 5;
+    display: flex;
+    flex-direction: column;
 }
 
 #btn-0 {
@@ -44,10 +40,12 @@ button {
 
 #previous {
     background-color: lightcoral;
-    height: 1rem;
+    height: 1.25rem;
+    font-size: 1rem;
 }
 
 #current {
     background-color: lightblue;
-    height: 1rem;
+    height: 2.25rem;
+    font-size: 2rem;
 }
