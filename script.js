@@ -82,7 +82,10 @@ clear.addEventListener('click', () => {
 });
 
 dot.addEventListener('click', () => {
-    if (!currDisplay.textContent.includes('.')) currDisplay.textContent += dot.textContent;
+    if (!currDisplay.textContent.includes('.')) {
+        currDisplay.textContent += dot.textContent;
+        currDisplay.textContent = currDisplay.textContent.slice(0, 13);
+    }
 });
 
 let values = [];
