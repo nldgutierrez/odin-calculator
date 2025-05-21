@@ -37,7 +37,7 @@ function operate(operation, firstOperand, secondOperand) {
         case operation.includes('/'):
             return divide(firstOperand, secondOperand);
         default :
-            console.log('failed')
+            console.log('failed');
     }
 }
 
@@ -56,6 +56,8 @@ const dot = document.querySelector('#dot');
 const backspace = document.querySelector('#backspace');
 const clear = document.querySelector('#clear');
 
+const negative = document.querySelector('#negative');
+
 let result;
 
 numbers.forEach((number) => {
@@ -68,19 +70,27 @@ numbers.forEach((number) => {
     });
 });
 
+negative.addEventListener('click', () => {
+    if (!currDisplay.textContent.includes('-')) {
+        currDisplay.textContent = `-${currDisplay.textContent}`
+    } else {
+        currDisplay.textContent = currDisplay.textContent.slice(1);
+    }
+});
+
 backspace.addEventListener('click', () => {
     currDisplay.textContent = currDisplay.textContent.slice(0, currDisplay.textContent.length-1);
-})
+});
 
 clear.addEventListener('click', () => {
     currDisplay.textContent = ''
     prevDisplay.textContent = ''
     values = [];
-})
+});
 
 dot.addEventListener('click', () => {
     if (!currDisplay.textContent.includes('.')) currDisplay.textContent += dot.textContent;
-})
+});
 
 let values = [];
 
@@ -91,13 +101,13 @@ operators.forEach((operator) => {
 
         if (currDisplay.textContent) {
             values.push(Number(currDisplay.textContent));
-            prevDisplay.textContent += `${currDisplay.textContent}${operator.textContent}`
+            prevDisplay.textContent += `${currDisplay.textContent}${operator.textContent}`;
             currDisplay.textContent = '';
         }
 
         if (prevDisplay.textContent && !currDisplay.textContent) {
             prevDisplay.textContent = prevDisplay.textContent.slice(0, prevDisplay.textContent.length-1);
-            prevDisplay.textContent += `${operator.textContent}`
+            prevDisplay.textContent += `${operator.textContent}`;
         }
 
         if (values.length == 2) {

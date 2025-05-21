@@ -33,12 +33,6 @@
     grid-column: 1 / 5;
 }
 
-#equals {
-    aspect-ratio: unset;
-    grid-column: 4 / 5;
-    grid-row: 5 / 7;
-}
-
 #zero {
     aspect-ratio: unset;
     grid-column: 1 / 3;
