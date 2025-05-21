@@ -68,6 +68,10 @@ negative.addEventListener('click', () => {
 });
 
 backspace.addEventListener('click', () => {
+    if (result) {
+        result = 0;
+        currDisplay.textContent = '';
+    }
     currDisplay.textContent = currDisplay.textContent.slice(0, currDisplay.textContent.length-1);
 });
 
