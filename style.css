@@ -33,7 +33,7 @@
     grid-column: 1 / 5;
 }
 
-#zero {
+#btn-0 {
     aspect-ratio: unset;
     grid-column: 1 / 3;
 }

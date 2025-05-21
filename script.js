@@ -44,16 +44,12 @@ function operate(operation, firstOperand, secondOperand) {
 const prevDisplay = document.querySelector('#previous');
 const currDisplay = document.querySelector('#current');
 
-const plus = document.querySelector('#add');
-const minus = document.querySelector('#subtract');
-const times = document.querySelector('#multiply');
-const dividedBy = document.querySelector('#divide');
-const equals = document.querySelector('#equals');
+const equals = document.querySelector('#btn-Enter');
 
 const numbers = document.querySelectorAll('.number');
 const dot = document.querySelector('#dot');
 
-const backspace = document.querySelector('#backspace');
+const backspace = document.querySelector('#btn-Backspace');
 const clear = document.querySelector('#clear');
 
 const negative = document.querySelector('#negative');
@@ -133,3 +129,10 @@ equals.addEventListener('click', () => {
     prevDisplay.textContent = '';
     values = [];
 });
+
+// Keyboard Support
+
+document.addEventListener('keydown', (event) => {
+    document.getElementById(`btn-${event.key}`)?.click();
+    if (event.key === '.') dot.click();
+})
