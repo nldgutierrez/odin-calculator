@@ -54,6 +54,9 @@ numbers.forEach((number) => {
             result = 0;
             currDisplay.textContent = '';
         }
+        
+        if (number.id === 'btn-0' && currDisplay.textContent === '0') return;
+
         currDisplay.textContent += number.textContent;
         currDisplay.textContent = currDisplay.textContent.slice(0, 13);
     });
