@@ -100,7 +100,7 @@ operators.forEach((operator) => {
 
         if (currDisplay.textContent) {
             values.push(Number(currDisplay.textContent));
-            prevDisplay.textContent += `${currDisplay.textContent}${operator.textContent}`;
+            prevDisplay.textContent += `${currDisplay.textContent} ${operator.textContent}`;
             currDisplay.textContent = '';
         }
 
@@ -114,7 +114,7 @@ operators.forEach((operator) => {
             values = [];
             values.push(answer);
             currDisplay.textContent = '';
-            prevDisplay.textContent = `${answer}${operator.textContent}`;
+            prevDisplay.textContent = `${answer} ${operator.textContent}`;
         }
     });
 });
