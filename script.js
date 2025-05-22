@@ -48,6 +48,8 @@ const negative = document.querySelector('#negative');
 
 let result;
 
+if (currDisplay.textContent === '' && !result) currDisplay.textContent = '0';
+
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
         if (result) {
@@ -56,6 +58,10 @@ numbers.forEach((number) => {
         }
         
         if (number.id === 'btn-0' && currDisplay.textContent === '0') return;
+
+        if (currDisplay.textContent === '0' && number.id !== 'dot') {
+            currDisplay.textContent = '';
+        }
 
         currDisplay.textContent += number.textContent;
         currDisplay.textContent = currDisplay.textContent.slice(0, 13);
@@ -75,7 +81,12 @@ backspace.addEventListener('click', () => {
         result = 0;
         currDisplay.textContent = '';
     }
+
+    if (currDisplay.textContent === '0') return;
+    
     currDisplay.textContent = currDisplay.textContent.slice(0, currDisplay.textContent.length-1);
+    if (currDisplay.textContent.length === 0) currDisplay.textContent = '0';
+    
 });
 
 clear.addEventListener('click', () => {
