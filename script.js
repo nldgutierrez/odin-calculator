@@ -28,7 +28,7 @@ function operate(operator, value1, value2) {
 }
 
 // DOM Selects
-const display = document.querySelector('.display');
+const display = document.querySelector('.display p');
 const numbers = document.querySelectorAll('.number');
 const operations = document.querySelectorAll('.operation');
 const equals = document.querySelector('#equals');
@@ -42,7 +42,7 @@ numbers.forEach((number) => {
     number.addEventListener('click', () => {
         if (display.textContent === '0') display.textContent = '';
         display.textContent += number.textContent;
-        display.textContent = display.textContent.slice(0, 12);
+        display.textContent = display.textContent.slice(0, 11);
     });
 });
 
@@ -50,18 +50,23 @@ numbers.forEach((number) => {
 operations.forEach((operation) => {
     operation.addEventListener('click', () => {
         operator = operation.getAttribute('key');
-
+        
         // Save values when clicking an operation
-        value1 = value2; 
-        value2 = Number(display.textContent);
-
-        // Operate when there are two values
-        if (value1 && value2) answer = operate(operator, value1, value2);
-        if (answer) {
-            display.textContent = answer;
-            display.textContent = display.textContent.slice(0, 13);
+        if (display.textContent != '') {
+            value1 = value2;
+            value2 = Number(display.textContent);
         }
+        
+        display.textContent = '';
 
-        console.log(`value1: ${value1}, value2: ${value2}, answer: ${answer}`)
+        console.log(`OPERATOR value1: ${value1}, value2: ${value2}, answer: ${answer}`)
     });
 });
+
+// Equals button
+equals.addEventListener('click', () => {
+    answer = operate(operator, value1, value2);
+    display.textContent = answer;
+    display.textContent = display.textContent.slice(0, 11);
+    console.log(`EQUALS value1: ${value1}, value2: ${value2}, answer: ${answer}`)
+})
