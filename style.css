@@ -62,7 +62,7 @@ button {
     background-color: ghostwhite;
 }
 
-.operator, #equals {
+.operation, #equals {
     background-color: rgb(201, 240, 241);
     border: 2px solid rgb(111, 199, 199);
 }

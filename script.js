@@ -12,9 +12,11 @@ function divide(a, b) {
 let value1;
 let value2;
 let operator;
+let answer;
 
 // Operate Function
 function operate(operator, value1, value2) {
+    console.log(operator);
     switch (operator) {
         case '+': return add(value1, value2);
         case '-': return subtract(value1, value2);
@@ -41,5 +43,25 @@ numbers.forEach((number) => {
         if (display.textContent === '0') display.textContent = '';
         display.textContent += number.textContent;
         display.textContent = display.textContent.slice(0, 12);
+    });
+});
+
+// Saving and operating values when clicking an operation button
+operations.forEach((operation) => {
+    operation.addEventListener('click', () => {
+        operator = operation.getAttribute('key');
+
+        // Save values when clicking an operation
+        value1 = value2; 
+        value2 = Number(display.textContent);
+
+        // Operate when there are two values
+        if (value1 && value2) answer = operate(operator, value1, value2);
+        if (answer) {
+            display.textContent = answer;
+            display.textContent = display.textContent.slice(0, 13);
+        }
+
+        console.log(`value1: ${value1}, value2: ${value2}, answer: ${answer}`)
     });
 });
