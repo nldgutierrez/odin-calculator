@@ -34,3 +34,12 @@ const dot = document.querySelector('#dot');
 const c = document.querySelector('#backspace');
 const ac = document.querySelector('#clear');
 const negative = document.querySelector('#negative');
+
+// Inputting in the display
+numbers.forEach((number) => {
+    number.addEventListener('click', () => {
+        if (display.textContent === '0') display.textContent = '';
+        display.textContent += number.textContent;
+        display.textContent = display.textContent.slice(0, 12);
+    });
+});
