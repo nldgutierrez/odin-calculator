@@ -9,7 +9,6 @@ function divide(a, b) {
 }
 
 // Variables
-
 let value1;
 let value2;
 let operator;
@@ -17,19 +16,19 @@ let operator;
 // Operate Function
 function operate(operator, value1, value2) {
     switch (operator) {
-        case '+':
-            add(value1, value2);
-            break;
-        case '-':
-            subtract(value1, value2);
-            break;
-        case '*':
-            multiply(value1, value2);
-            break;
-        case '/':
-            divide(value1, value2);
-            break;
+        case '+': return add(value1, value2);
+        case '-': return subtract(value1, value2);
+        case '*': return multiply(value1, value2);
+        case '/': return divide(value1, value2);
         default:
             console.log('Operation failed');
     }
 }
+
+// DOM Selects
+const numbers = document.querySelectorAll('.number');
+const operations = document.querySelectorAll('.operation');
+const equals = document.querySelector('#equals');
+const dot = document.querySelector('#dot');
+const c = document.querySelector('#backspace');
+const ac = document.querySelector('#clear');
