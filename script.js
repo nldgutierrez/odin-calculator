@@ -26,9 +26,11 @@ function operate(operator, value1, value2) {
 }
 
 // DOM Selects
+const display = document.querySelector('.display');
 const numbers = document.querySelectorAll('.number');
 const operations = document.querySelectorAll('.operation');
 const equals = document.querySelector('#equals');
 const dot = document.querySelector('#dot');
 const c = document.querySelector('#backspace');
 const ac = document.querySelector('#clear');
+const negative = document.querySelector('#negative');
