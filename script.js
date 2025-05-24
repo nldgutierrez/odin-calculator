@@ -4,7 +4,7 @@ function add(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
 function multiply(a, b) { return a * b; }
 function divide(a, b) {
-    if (a === 0 || b === 0) return 'ERROR';
+    if (!a || !b) return 'ERROR';
     return a / b;
 }
 
@@ -13,10 +13,12 @@ let value1;
 let value2;
 let operator;
 let answer;
+let input;
 
 // Operate Function
 function operate(operator, value1, value2) {
-    console.log(operator);
+    console.log(`OPERATION: ${value1} ${operator} ${value2}`)
+    if (value1 === 'ERROR' || value2 === 'ERROR') return 'ERROR'
     switch (operator) {
         case '+': return add(value1, value2);
         case '-': return subtract(value1, value2);
@@ -40,33 +42,34 @@ const negative = document.querySelector('#negative');
 // Inputting in the display
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
+        if (answer && display.textContent == answer) display.textContent = ''; // Reset display when inputting a number after equals button is clicked
         if (display.textContent === '0') display.textContent = '';
+        if (value2 == input) display.textContent = '';
         display.textContent += number.textContent;
         display.textContent = display.textContent.slice(0, 11);
+        input = Number(display.textContent);
     });
 });
 
 // Saving and operating values when clicking an operation button
 operations.forEach((operation) => {
     operation.addEventListener('click', () => {
+        console.log(`input: ${input}`)
+        if (answer) display.textContent = answer;
+        equals.click();
         operator = operation.getAttribute('key');
-        
-        // Save values when clicking an operation
-        if (display.textContent != '') {
-            value1 = value2;
-            value2 = Number(display.textContent);
-        }
-        
-        display.textContent = '';
-
-        console.log(`OPERATOR value1: ${value1}, value2: ${value2}, answer: ${answer}`)
     });
 });
 
 // Equals button
 equals.addEventListener('click', () => {
-    answer = operate(operator, value1, value2);
+    value1 = value2;
+    if (answer) value1 = answer;
+    value2 = input;
+    if (value2) answer = operate(operator, value1, value2);
+    if (!answer && answer != 0) return;
     display.textContent = answer;
     display.textContent = display.textContent.slice(0, 11);
-    console.log(`EQUALS value1: ${value1}, value2: ${value2}, answer: ${answer}`)
-})
+    value2 = '';
+    input = '';
+});
