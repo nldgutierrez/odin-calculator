@@ -59,6 +59,12 @@ operations.forEach((operation) => {
         equals.click();
         operator = operation.getAttribute('key');
         input = '';
+
+        // Add active style while waiting for input
+        operations.forEach((operation) => {
+            operation.classList.remove('active');
+        })
+        operation.classList.add('active');
     });
 });
 
@@ -75,4 +81,9 @@ equals.addEventListener('click', () => {
     console.log(`answer: ${answer}`)
     value2 = '';
     input = '';
+    
+    // Remove active style from operator
+    operations.forEach((operation) => {
+        operation.classList.remove('active');
+    })
 });
