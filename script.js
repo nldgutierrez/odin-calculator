@@ -44,6 +44,7 @@ numbers.forEach((number) => {
     number.addEventListener('click', () => {
         if (answer && display.textContent == answer) display.textContent = ''; // Reset display when inputting a number after equals button is clicked
         if (display.textContent === '0') display.textContent = '';
+        if (display.textContent != input && display.textContent != '0.') display.textContent = '';
         display.textContent += number.textContent;
         display.textContent = display.textContent.slice(0, 11);
         input = Number(display.textContent);
@@ -87,3 +88,10 @@ equals.addEventListener('click', () => {
         operation.classList.remove('active');
     })
 });
+
+dot.addEventListener('click', () => {
+    if (display.textContent == answer || value1 == undefined) display.textContent = 0;
+    if (display.textContent.includes('.')) return;
+    if (display.textContent === '0') display.textContent = '0'
+    display.textContent += dot.textContent;
+})
