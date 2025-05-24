@@ -146,3 +146,10 @@ ac. addEventListener('click', () => {
     answer = undefined;
     operator = undefined;
 });
+
+// Keyboard Support
+
+document.addEventListener('keydown', (event) => {
+    document.querySelector(`[key='${event.key}']`)?.click();
+    if (event.key === '.') dot.click();
+});
