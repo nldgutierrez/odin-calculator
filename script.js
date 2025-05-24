@@ -147,9 +147,19 @@ ac. addEventListener('click', () => {
     operator = undefined;
 });
 
-// Keyboard Support
-
+// Keyboard support & toggle active styles
 document.addEventListener('keydown', (event) => {
     document.querySelector(`[key='${event.key}']`)?.click();
     if (event.key === '.') dot.click();
+
+    document.querySelector(`[key='${event.key}']`).classList.add('active');
+});
+
+document.addEventListener('keyup', () => {
+    numbers.forEach((number) => {
+        number.classList.remove('active');
+    })
+    dot.classList.remove('active');
+    c.classList.remove('active');
+    equals.classList.remove('active');
 });
