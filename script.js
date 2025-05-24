@@ -44,7 +44,6 @@ numbers.forEach((number) => {
     number.addEventListener('click', () => {
         if (answer && display.textContent == answer) display.textContent = ''; // Reset display when inputting a number after equals button is clicked
         if (display.textContent === '0') display.textContent = '';
-        if (value2 == input) display.textContent = '';
         display.textContent += number.textContent;
         display.textContent = display.textContent.slice(0, 11);
         input = Number(display.textContent);
@@ -54,22 +53,26 @@ numbers.forEach((number) => {
 // Saving and operating values when clicking an operation button
 operations.forEach((operation) => {
     operation.addEventListener('click', () => {
+        if (display.textContent === '0') input = 0;
         console.log(`input: ${input}`)
         if (answer) display.textContent = answer;
         equals.click();
         operator = operation.getAttribute('key');
+        input = '';
     });
 });
 
 // Equals button
 equals.addEventListener('click', () => {
-    value1 = value2;
+    if (value2 != undefined) value1 = value2;
     if (answer) value1 = answer;
     value2 = input;
+    console.log(`VALUES value1: ${value1}, value2: ${value2}, answer: ${answer}`)
     if (value2) answer = operate(operator, value1, value2);
     if (!answer && answer != 0) return;
     display.textContent = answer;
     display.textContent = display.textContent.slice(0, 11);
+    console.log(`answer: ${answer}`)
     value2 = '';
     input = '';
 });
