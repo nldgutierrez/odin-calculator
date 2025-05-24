@@ -131,4 +131,9 @@ negative.addEventListener('click', () => {
     } else {
         display.textContent = display.textContent.slice(1);
     }
-})
+});
+
+c.addEventListener('click', () => {
+    if (display.textContent !== '0') display.textContent = display.textContent.slice(0, display.textContent.length-1);
+    if (display.textContent.length === 0) display.textContent = '0';
+});
