@@ -122,3 +122,13 @@ dot.addEventListener('click', () => {
     if (display.textContent == '') display.textContent = '0'; // Start with zero if dot is first clicked
     display.textContent += dot.textContent;
 });
+
+negative.addEventListener('click', () => {
+    if (!display.textContent.includes('-')) {
+        if (display.textContent !== '0') {
+            display.textContent = `-${display.textContent}`;
+        }
+    } else {
+        display.textContent = display.textContent.slice(1);
+    }
+})
