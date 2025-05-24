@@ -137,3 +137,12 @@ c.addEventListener('click', () => {
     if (display.textContent !== '0') display.textContent = display.textContent.slice(0, display.textContent.length-1);
     if (display.textContent.length === 0) display.textContent = '0';
 });
+
+ac. addEventListener('click', () => {
+    display.textContent = '0';
+    input = undefined;
+    value1 = undefined;
+    value2 = undefined;
+    answer = undefined;
+    operator = undefined;
+});
