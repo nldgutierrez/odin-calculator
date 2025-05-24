@@ -14,10 +14,11 @@ let value2;
 let operator;
 let answer;
 let input;
+let resetDisplay = false;
 
 // Operate Function
 function operate(operator, value1, value2) {
-    console.log(`OPERATION: ${value1} ${operator} ${value2}`)
+    console.log(`OPERATION: v1: ${value1}, ${operator}, v2: ${value2}`)
     if (value1 === 'ERROR' || value2 === 'ERROR') return 'ERROR'
     switch (operator) {
         case '+': return add(value1, value2);
@@ -39,59 +40,85 @@ const c = document.querySelector('#backspace');
 const ac = document.querySelector('#clear');
 const negative = document.querySelector('#negative');
 
-// Inputting in the display
+display.textContent = '0'; // Default 0 as display
+
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
-        if (answer && display.textContent == answer) display.textContent = ''; // Reset display when inputting a number after equals button is clicked
-        if (display.textContent === '0') display.textContent = '';
-        if (display.textContent != input && display.textContent != '0.') display.textContent = '';
-        display.textContent += number.textContent;
-        display.textContent = display.textContent.slice(0, 11);
-        input = Number(display.textContent);
+        if (display.textContent === '0') display.textContent = ''; // Avoid leading zeroes
+        
+        // Reset display when adding operands
+        if (resetDisplay) display.textContent = '';
+        resetDisplay = false;
+
+        display.textContent += number.textContent; // Input numbers in the display
+        display.textContent = display.textContent.slice(0, 11); // Limit input to 11 digits
+        input = Number(display.textContent); // Save input value
     });
 });
 
-// Saving and operating values when clicking an operation button
+// Operation
 operations.forEach((operation) => {
     operation.addEventListener('click', () => {
-        if (display.textContent === '0') input = 0;
-        console.log(`input: ${input}`)
-        if (answer) display.textContent = answer;
-        equals.click();
-        operator = operation.getAttribute('key');
-        input = '';
 
-        // Add active style while waiting for input
+        console.log(`is there answer? ${answer}`)
+
+        // Save & operate values only when there's user input for consecutive operations clicked
+        if (input) {
+            value1 = value2; 
+            if (answer !== undefined && answer !== 'ERROR') value1 = answer; // Save answer as operand when chaining operations
+            value2 = input; // Save input value as operand
+            
+            // Operate with the last operator used
+            answer = operate(operator, value1, value2);
+            console.log(`answer: ${answer}, type: ${typeof(answer)}`)
+            if (answer !== undefined) display.textContent = answer;
+            display.textContent = display.textContent.slice(0, 11); // Limit display to 11 digits
+    
+            
+            input = ''; // Reset input value for next operand
+            resetDisplay = true;
+        }
+        
+        operator = operation.getAttribute('key'); // Set operator
+
+        // Toggle active class when operation is clicked
         operations.forEach((operation) => {
             operation.classList.remove('active');
-        })
+        });
         operation.classList.add('active');
     });
 });
 
-// Equals button
 equals.addEventListener('click', () => {
-    if (value2 != undefined) value1 = value2;
-    if (answer) value1 = answer;
-    value2 = input;
-    console.log(`VALUES value1: ${value1}, value2: ${value2}, answer: ${answer}`)
-    if (value2) answer = operate(operator, value1, value2);
-    if (!answer && answer != 0) return;
-    display.textContent = answer;
-    display.textContent = display.textContent.slice(0, 11);
-    console.log(`answer: ${answer}`)
-    value2 = '';
-    input = '';
-    
-    // Remove active style from operator
+    value1 = value2;
+    if (answer !== undefined) value1 = answer; // Save answer as operand when chaining operations
+    value2 = input; // Save last input as two operands
+
+    answer = operate(operator, value1, value2);
+    console.log(answer)
+    if (answer !== undefined) display.textContent = answer;
+    display.textContent = display.textContent.slice(0, 11); // Limit display to 11 digits
+
+    // Remove active class in operations
     operations.forEach((operation) => {
         operation.classList.remove('active');
-    })
+    });
+
+    // End chain of operations
+    input = undefined;
+    resetDisplay = true;
+    value1 = undefined;
+    value2 = undefined;
+    operator = undefined;
 });
 
 dot.addEventListener('click', () => {
-    if (display.textContent == answer || value1 == undefined) display.textContent = 0;
-    if (display.textContent.includes('.')) return;
-    if (display.textContent === '0') display.textContent = '0'
+    if (display.textContent.includes('.')) return; // Prevent more than one dot
+
+    // Reset display when adding operands
+    if (resetDisplay) display.textContent = '';
+    resetDisplay = false;
+
+    if (display.textContent == '') display.textContent = '0'; // Start with zero if dot is first clicked
     display.textContent += dot.textContent;
-})
+});
