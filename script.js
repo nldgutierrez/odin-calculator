@@ -113,12 +113,12 @@ equals.addEventListener('click', () => {
 });
 
 dot.addEventListener('click', () => {
-    if (display.textContent.includes('.')) return; // Prevent more than one dot
-
     // Reset display when adding operands
     if (resetDisplay) display.textContent = '';
     resetDisplay = false;
-
+    
+    if (display.textContent.includes('.')) return; // Prevent more than one dot
+    
     if (display.textContent == '') display.textContent = '0'; // Start with zero if dot is first clicked
     display.textContent += dot.textContent;
 });
@@ -138,13 +138,18 @@ c.addEventListener('click', () => {
     if (display.textContent.length === 0) display.textContent = '0';
 });
 
-ac. addEventListener('click', () => {
+ac.addEventListener('click', () => {
     display.textContent = '0';
     input = undefined;
     value1 = undefined;
     value2 = undefined;
     answer = undefined;
     operator = undefined;
+
+    // Remove active class in operations
+    operations.forEach((operation) => {
+        operation.classList.remove('active');
+    });
 });
 
 // Keyboard support & toggle active styles
